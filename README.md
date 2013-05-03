@@ -52,10 +52,10 @@ The AppleScript record resulting from the alert can be accessed as a Python dict
 
 There are two convenience methods to further process the user input in Python:
 	
-	myAlert.buttonReturned
-returns the button as string, unless the user canceled, which can be tested for with
+	myAlert.buttonReturned()
+returns the text of the button the user clicked as string, unless the user canceled, which can be tested for with
 
-	myAlert.canceled
+	myAlert.canceled()
 	
 which returns True if the alert was canceled, otherwise False.
 
@@ -89,17 +89,22 @@ The name of the application you want to display the dialog, defaults to System E
 The string you want to prefill a text input field with. Pass empty string for an empty input field.
 
 ####hiddenAnswer (string)
-The hidden (displayed as bullets) string you want to prefill a text input with. Pass empty string for empty input field.
+The hidden (displayed as bullets) string you want to prefill a text input with. Pass empty string for empty input field (User input in this field will still be displayed as bullets).
 
 ####buttons
+The buttons you want for your dialog. Defaults to Cancel and OK.
 
 ####defaultButton
+The default Enter/Return-actionable button. Defaults to ok if not specified and no buttons have been specified either, if you have specified buttons but no default button, none of them will be the default button. To specify a default button with your custom buttons use either name or index.
 
 ####cancelButton
+The button to cancel the dialog. Only sensible if you have specified a button for canceling, otherwise ignored. Specify name or index.
 
 ####icon
+A custom icon you want your dialog to display. Specify an .icns file.
 
 ####givingUpAfter
+The number of seconds after which you want the dialog to disappear if the user didn't click a button.
 
 ###Example
 
@@ -107,6 +112,21 @@ The hidden (displayed as bullets) string you want to prefill a text input with. 
 ### Accessing the Dialog Result, Methods
 
 	myDialog.result
+	
+	
+There are multiple convenience methods to further process the result of your dialog in Python:
+
+	myDialog.buttonReturned()
+	
+returns the text of the button the user clicked as string, unless the user canceled, which can be tested for with
+
+	myDialog.canceled()
+	
+which returns True if the dialog was canceled, otherwise False.
+
+If your dialog used a text input (defaultAnswer or hiddenAnswer), the returned text can be retrieved like this:
+
+	myDialog.textReturned()
 	
 
 
