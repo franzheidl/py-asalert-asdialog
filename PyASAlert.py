@@ -1,7 +1,7 @@
 # PyASAlert
 # A simple Python wrapper for an AppleScript alert.
 # Franz Heidl 2013
-# http://github.com/franzheidl/
+# http://github.com/franzheidl/py-asalert-asdialog
 # MIT license.
 
 
@@ -87,8 +87,8 @@ class ASAlert:
                 pass
         
         
-        self.result = self.displayAlert(self.applicationstring, self.alertstring)
-        self.alert["result"] = self.result
+        self._result = self.displayAlert(self.applicationstring, self.alertstring)
+        self.alert["result"] = self._result
         
         
         
@@ -104,12 +104,19 @@ class ASAlert:
             '-e', 'return theResult',
             '-e', 'end tell'])
         return self._dictify(self.output)
+        
+    
+    def result(self):
+        if self._result:
+            return self._result
+        else:
+            return False
     
     
     def buttonReturned(self):
         if self.result:
-            if "button returned" in self.result.keys():
-                return self.result["button returned"]
+            if "button returned" in self.result().keys():
+                return (self.result())["button returned"]
             else:
                 return False
         else:
@@ -119,7 +126,7 @@ class ASAlert:
     def canceled(self):
         if self.result:
             try:
-                return self.result["canceled"]
+                return (self.result())["canceled"]
             except KeyError:
                 return False
         else:

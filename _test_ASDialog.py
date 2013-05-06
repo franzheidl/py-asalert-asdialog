@@ -12,4 +12,7 @@ if testDialog.result():
     print testDialog.canceled()
     print testDialog.buttonReturned()
     print testDialog.textReturned()
+    
+    print testAlert.result()
+    print testAlert.buttonReturned()
         
