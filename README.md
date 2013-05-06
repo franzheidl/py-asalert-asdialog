@@ -1,5 +1,7 @@
 ***Simple Python wrappers for AppleScript Alerts and Dialogs.***
 
+![PyASDialog Screenshot](http://github.com/franzheidl/py-asalert-asdialog/raw/master/screenshots/PyASDialog.png)
+
 * PyASAlert
 * PyASDialog
 
