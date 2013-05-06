@@ -1,7 +1,7 @@
 # PyASDialog
 # A simple Python wrapper for an AppleScript dialog.
 # Franz Heidl 2013
-# http://github.com/franzheidl/
+# http://github.com/franzheidl/py-asalert-asdialog
 # MIT license.
 
 
@@ -118,8 +118,8 @@ class ASDialog:
                 pass
             
                 
-        self.result = self.displayDialog(self.applicationString, self.dialogString)
-        self.dialog["result"] = self.result
+        self._result = self.displayDialog(self.applicationString, self.dialogString)
+        self.dialog["result"] = self._result
         
         
     def displayDialog(self, theApplication, theDialog):
@@ -135,30 +135,36 @@ class ASDialog:
             '-e', 'end tell'])
         return self._dictify(self.output)
         
-        
+    
+    def result(self):
+        if self._result:
+            return self._result
+        else:
+            return False
+       
         
     def buttonReturned(self):
-        if self.result:
-            if "button returned" in self.result.keys():
-                return self.result["button returned"]
+        if self.result():
+            if "button returned" in self.result().keys():
+                return (self.result())["button returned"]
             else:
                 return False
         else:
             return False
 
     def canceled(self):
-        if self.result:
+        if self.result():
             try:
-                return self.result["canceled"]
+                return (self.result())["canceled"]
             except KeyError:
                 return False
         else:
             return False
 
     def textReturned(self):
-        if self.result:
+        if self.result():
             try:
-                return self.result["text returned"]
+                return (self.result())["text returned"]
             except KeyError:
                 return False
         else:
