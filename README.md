@@ -3,9 +3,6 @@
 
 ![PyASDialog Screenshot](http://github.com/franzheidl/py-asalert-asdialog/raw/master/screenshots/PyASDialog.png)
 
-* PyASAlert
-* PyASDialog
-
 ##PyASAlert
 Class that creates an AppleScript alert using an osascript subprocess. The ASAlert object as well as the result of the alert are easily accessible via Python.
 
