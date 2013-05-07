@@ -110,6 +110,8 @@ The number of seconds after which you want the dialog to disappear if the user d
 
 #### Example
 
+	myDialog = ASDialog(title="My Dialog", text"Type Something:", defaultAnswer="", buttons="Cancel, Agree, Decline")
+
 
 ### Accessing the Dialog Result, Methods
 The result from a dialog can be accessed as a Python dict by calling
