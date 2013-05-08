@@ -1,10 +1,8 @@
 #PyASAlert, PyASDialog
 ***Simple Python wrappers for AppleScript Alerts and Dialogs.***
 
-![PyASDialog Screenshot](http://github.com/franzheidl/py-asalert-asdialog/raw/master/screenshots/PyASDialog.png)
 
 ##PyASAlert
-Class that creates an AppleScript alert using an osascript subprocess. The ASAlert object as well as the result of the alert are easily accessible via Python.
 
 ### Usage
 
@@ -66,7 +64,8 @@ which returns True if the alert was canceled, otherwise False.
 
 
 ## PyASDialog
-Class that creates an AppleScript dialog using an osascript subprocess. The ASDialog object as well as the result of the dialog are easily accessible via Python.
+
+![PyASDialog Screenshot](http://github.com/franzheidl/py-asalert-asdialog/raw/master/screenshots/PyASDialog.png)
 
 ### Usage
 
@@ -76,13 +75,14 @@ Class that creates an AppleScript dialog using an osascript subprocess. The ASDi
 	myDialog = ASDialog()
 
 
-ASDialog takes the follwoing keyword arguments (all optional:
+ASDialog takes the following keyword arguments (all optional):
 #### Parameters
 
 ##### text (string)
 The text you want the dialog to display.
 
 ##### title (string)
+The title of the dialog
 
 ##### application (string)
 The name of the application you want to display the dialog, defaults to System Events.
@@ -93,19 +93,19 @@ The string you want to prefill a text input field with. Pass empty string for an
 ##### hiddenAnswer (string)
 The hidden (displayed as bullets) string you want to prefill a text input with. Pass empty string for empty input field (User input in this field will still be displayed as bullets).
 
-##### buttons
+##### buttons (string)
 The buttons you want for your dialog. Defaults to Cancel and OK.
 
-##### defaultButton
+##### defaultButton (string or integer)
 The default Enter/Return-actionable button. Defaults to ok if not specified and no buttons have been specified either, if you have specified buttons but no default button, none of them will be the default button. To specify a default button with your custom buttons use either name or index.
 
-##### cancelButton
+##### cancelButton (string or integer)
 The button to cancel the dialog. Only sensible if you have specified a button for canceling, otherwise ignored. Specify name or index.
 
-##### icon
+##### icon (string)
 A custom icon you want your dialog to display. Specify an .icns file.
 
-##### givingUpAfter
+##### givingUpAfter (strong or integer)
 The number of seconds after which you want the dialog to disappear if the user didn't click a button.
 
 #### Example
