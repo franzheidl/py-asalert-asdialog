@@ -8,11 +8,11 @@ if testDialog.result():
     elif testDialog.buttonReturned():
         testAlert = ASAlert(title="ASAlert", message=("User clicked button: " + testDialog.buttonReturned() + ", Text returned was: " + testDialog.textReturned()))
         
-    print testDialog.result()
-    print testDialog.canceled()
-    print testDialog.buttonReturned()
-    print testDialog.textReturned()
+    print "Dialog result:", testDialog.result()
+    print "Dialog canceled: ", testDialog.canceled()
+    print "Dialog button returned: ",  testDialog.buttonReturned()
+    print "Dialog text returned: ", testDialog.textReturned()
     
-    print testAlert.result()
-    print testAlert.buttonReturned()
+    print "Alert result: ", testAlert.result()
+    print "Alert button returned:", testAlert.buttonReturned()
         
