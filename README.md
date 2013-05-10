@@ -1,6 +1,10 @@
 #PyASAlert, PyASDialog
 ***Simple Python wrappers for AppleScript Alerts and Dialogs.***
 
+Both implement all the options and parameters of their AppleScript counterparts, if these are multi-worded in AS they're camelcased in PyASAlert and PyASDialog.
+
+If you want you might just run `_demo_ASDialog.py` and take it from there.
+
 
 ##PyASAlert
 
