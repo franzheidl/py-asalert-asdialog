@@ -115,9 +115,9 @@ class ASAlert:
     
     def buttonReturned(self):
         if self.result:
-            if "button returned" in self.result().keys():
+            try:
                 return (self.result())["button returned"]
-            else:
+            except KeyError:
                 return False
         else:
             return False

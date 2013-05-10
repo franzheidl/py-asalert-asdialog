@@ -145,12 +145,13 @@ class ASDialog:
         
     def buttonReturned(self):
         if self.result():
-            if "button returned" in self.result().keys():
+            try:
                 return (self.result())["button returned"]
-            else:
+            except KeyError:
                 return False
         else:
             return False
+
 
     def canceled(self):
         if self.result():
@@ -160,6 +161,7 @@ class ASDialog:
                 return False
         else:
             return False
+
 
     def textReturned(self):
         if self.result():
