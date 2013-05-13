@@ -17,13 +17,12 @@ Or you might just have a look at and run `_demo_ASDialog.py` and take it from th
 	
 	
 ASAlert takes the following keyword arguments (all optional):
-#### Parameters
 
 ##### title (string)
-The alert title (displayed in bold type)
+The alert title, displayed in bold type.
 
 ##### message (string)
-The alert message text
+The alert message text.
 
 ##### buttons (string)
 The buttons you want the alert to show, max. 3. If you specify three buttons, the first will be on the left side of the alert, the others on the right. Defaults to OK as default Button actionable by Enter/Return key if not specified.
@@ -32,7 +31,7 @@ The buttons you want the alert to show, max. 3. If you specify three buttons, th
 The alert type, can be "informational", "warning", and "critical", whereas "critical" looks identical to "informational".
 
 ##### defaultButton (string or integer)
-The default Enter/Return-actionable button. Defaults to ok if not specified and no buttons have been specified either, if you have specified buttons but no default button, none of them will be the default button. To specify a default button with your custom buttons use either name or index.
+The default, Enter/Return-actionable button. Defaults to ok if not specified and no buttons have been specified either, if you have specified buttons but no default button, none of them will be the default button. To specify a default button with your custom buttons use either name or index.
 
 ##### cancelButton (string or integer)
 The button to cancel the alert. Only sensible if you have specified a button for canceling, otherwise ignored. Specify name or index.
@@ -45,7 +44,14 @@ The application you want to tell to display the dialog, defaults to Finder.
 
 #### Example
 
-    myAlert = Alert(application="System Events", title="Hi!", message="Some Message for you here", buttons="OK, Stop this, Cancel", displayAs="warning", defaultButton="Stop this", cancelButton=3, givingUpAfter=15)
+    myAlert = Alert(application="System Events", 
+    	title="Hi!", 
+    	message="Some Message for you here", 
+    	buttons="OK, Stop this, Cancel", 
+    	displayAs="warning", 
+    	defaultButton="Stop this", 
+    	cancelButton=3, 
+    	givingUpAfter=15)
 
 ### Accessing the Alert Result, Methods
 The result of an alert can be accessed as a Python dict by calling
@@ -80,13 +86,12 @@ which returns True if the alert was canceled, otherwise False.
 
 
 ASDialog takes the following keyword arguments (all optional):
-#### Parameters
 
 ##### text (string)
 The text you want the dialog to display.
 
 ##### title (string)
-The title of the dialog
+The title of the dialog as shown in the title bar.
 
 ##### application (string)
 The name of the application you want to display the dialog, defaults to System Events.
@@ -101,7 +106,7 @@ The hidden (displayed as bullets) string you want to prefill a text input with. 
 The buttons you want for your dialog. Defaults to Cancel and OK.
 
 ##### defaultButton (string or integer)
-The default Enter/Return-actionable button. Defaults to ok if not specified and no buttons have been specified either, if you have specified buttons but no default button, none of them will be the default button. To specify a default button with your custom buttons use either name or index.
+The default, Enter/Return-actionable button. Defaults to ok if not specified and no buttons have been specified either, if you have specified buttons but no default button, none of them will be the default button. To specify a default button with your custom buttons use either name or index.
 
 ##### cancelButton (string or integer)
 The button to cancel the dialog. Only sensible if you have specified a button for canceling, otherwise ignored. Specify name or index.
@@ -109,12 +114,15 @@ The button to cancel the dialog. Only sensible if you have specified a button fo
 ##### icon (string)
 A custom icon you want your dialog to display. Specify an .icns file.
 
-##### givingUpAfter (strong or integer)
+##### givingUpAfter (string or integer)
 The number of seconds after which you want the dialog to disappear if the user didn't click a button.
 
 #### Example
 
-	myDialog = ASDialog(title="My Dialog", text"Type Something:", defaultAnswer="", buttons="Cancel, Agree, Decline")
+	myDialog = ASDialog(title="My Dialog", 
+		text"Type Something:", 
+		defaultAnswer="", 
+		buttons="Cancel, Agree, Decline")
 
 
 ### Accessing the Dialog Result, Methods
@@ -134,7 +142,7 @@ returns the text of the button the user clicked as string, unless the user cance
 	
 which returns True if the dialog was canceled, otherwise False.
 
-If your dialog used a text input (defaultAnswer or hiddenAnswer), the returned text can be retrieved like this:
+If your dialog uses a text input (defaultAnswer or hiddenAnswer), the returned text can be retrieved like this:
 
 	myDialog.textReturned()
 	
