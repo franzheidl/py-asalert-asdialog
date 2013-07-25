@@ -53,8 +53,6 @@ class ASSaveFileDialog():
             if not self._result.startswith("/"):
                 self._result = "/" + self._result
             
-        else:
-            self.dialog["cancelled"] = True
         self.dialog["result"] = self._result
         
             
@@ -75,7 +73,14 @@ class ASSaveFileDialog():
         
     def result(self):
         if self._result:
-            return self.dialog["result"]
+            return self._result
+        else:
+            return False
+            
+            
+    def canceled(self):
+        if self._result == "False":
+            return True
         else:
             return False
             

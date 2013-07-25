@@ -64,6 +64,8 @@ class ASChooseFolderDialog:
     
                 
         self._result = self.displayChooseFolderDialog(self.applicationString, self.dialogString)
+        self.dialog["result"] = self._result
+        
                
     
     def displayChooseFolderDialog(self, theApplication, theDialog):
@@ -88,14 +90,13 @@ class ASChooseFolderDialog:
             return False
             
             
-    def cancelled(self):
-        if self._result:
-            if self._result == "False":
-                return True
-            else:
-                return False
+    def canceled(self):
+        if self._result == "False":
+            return True
+        else:
+            return False
             
     
     def __repr__(self):
-        return self.result()
+        return self.dialog["result"]
             

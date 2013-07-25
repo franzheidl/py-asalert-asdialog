@@ -81,9 +81,6 @@ class ASOpenFileDialog():
 
         self._result = self.displayOpenDialog(self.applicationString, self.dialogString)
         self.dialog["result"] = self._result
-        if self._result == "False":
-            self.dialog["cancelled"] = True
-
            
         
     def displayOpenDialog(self,theApplication, theDialog):
@@ -111,13 +108,20 @@ class ASOpenFileDialog():
         if pathsString != "False":
             pathsList = pathsString.split(", ")
         else:
-            pathsList = False
+            pathsList = "False"
         return pathsList
     
     
     def result(self):
         if self._result:
             return self._result
+        else:
+            return False
+            
+            
+    def canceled(self):
+        if self._result == "False":
+            return True
         else:
             return False
     
