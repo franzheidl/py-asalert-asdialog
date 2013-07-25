@@ -90,17 +90,31 @@ class ASOpenFileDialog():
         
     def displayOpenDialog(self,theApplication, theDialog):
         self.output = subprocess.check_output(['osascript',
+            '-e', 'set theFiles to {}',
+            '-e', 'set thePFiles to {}',
             '-e', theApplication,
             '-e', 'activate',
             '-e', 'try',
             '-e', theDialog,
-            '-e', 'set theFile to (POSIX path of theFile) as text',
+            '-e', 'set theFiles to theFiles & theFile',
+            '-e', 'repeat with aFile in theFiles',
+            '-e', 'if the length of thePFiles is greater than 1',
+            '-e', 'set thePFiles to thePFiles & \", \" & (POSIX path of aFile) as text',
+            '-e', 'else',
+            '-e', 'set thePFiles to thePFiles & (POSIX path of aFile) as text',
+            '-e', 'end if',
+            '-e', 'end repeat',
             '-e', 'on error number -128',
-            '-e', 'set theFile to \"False\"',
+            '-e', 'set thePFiles to \"False\"',
             '-e', 'end try',
-            '-e', 'return theFile',
+            '-e', 'return thePFiles',
             '-e', 'end tell'])
-        return self.output.strip()
+        pathsString = self.output.strip()
+        if pathsString != "False":
+            pathsList = pathsString.split(", ")
+        else:
+            pathsList = False
+        return pathsList
     
     
     def result(self):
@@ -112,4 +126,8 @@ class ASOpenFileDialog():
             
     def __repr__(self):
         return self.result()
+     
+        
+    def __str__(self):
+        return str(self.result())
     
