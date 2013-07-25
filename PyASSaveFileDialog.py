@@ -1,9 +1,8 @@
 # PyASSaveFileDialog
-# A simple Python wrapper for an AppleScript Open File alert.
+# A simple Python wrapper for an AppleScript Save File dialog.
 # Franz Heidl 2013
 # http://github.com/franzheidl/py-asalert-asdialog
 # MIT license.
-
 
 
 import os

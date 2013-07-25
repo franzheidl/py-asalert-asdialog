@@ -1,10 +1,9 @@
 # PyASOpenFileDialog
-# A simple Python wrapper for an AppleScript Open File alert.
+# A simple Python wrapper for an AppleScript Open File dialog.
 # Franz Heidl 2013
 # http://github.com/franzheidl/py-asalert-asdialog
 # MIT license.
 
-# TODO check/fix/implement return value for multiple selections allowed
 
 import subprocess
 import os
@@ -79,8 +78,7 @@ class ASOpenFileDialog():
                 self.showingPackageContents = kwargs["showingPackageContents"]
                 self.dialog["showingPackageContents"] = False
         
-        print self.dialog
-        
+
         self._result = self.displayOpenDialog(self.applicationString, self.dialogString)
         self.dialog["result"] = self._result
         if self._result == "False":
