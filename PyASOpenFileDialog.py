@@ -93,7 +93,7 @@ class ASOpenFileDialog():
             '-e', theDialog,
             '-e', 'set theFiles to theFiles & theFile',
             '-e', 'repeat with aFile in theFiles',
-            '-e', 'if the length of thePFiles is greater than 1',
+            '-e', 'if the length of thePFiles is greater than 1 then',
             '-e', 'set thePFiles to thePFiles & \", \" & (POSIX path of aFile) as text',
             '-e', 'else',
             '-e', 'set thePFiles to thePFiles & (POSIX path of aFile) as text',
@@ -106,10 +106,13 @@ class ASOpenFileDialog():
             '-e', 'end tell'])
         pathsString = self.output.strip()
         if pathsString != "False":
-            pathsList = pathsString.split(", ")
+            if len(pathsString.split(", ")) > 1:
+                paths = pathsString.split(", ")
+            else:
+                paths = pathsString
         else:
-            pathsList = "False"
-        return pathsList
+            paths = "False"
+        return paths
     
     
     def result(self):

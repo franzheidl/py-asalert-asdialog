@@ -4,6 +4,9 @@
 # http://github.com/franzheidl/py-asalert-asdialog
 # MIT license.
 
+
+# TODO: returns HFS paths ?!? should be POSIX
+
 import os
 import subprocess
 
@@ -27,6 +30,15 @@ class ASChooseFolderDialog:
             self.prompt = kwargs["prompt"]
             self.dialog["prompt"] = self.prompt
             self.dialogString += (' with prompt ' + '\"' + self.prompt + '\"')
+        
+        
+        if "defaultLocation" in kwargs.keys():
+            if os.path.exists(kwargs["defaultLocation"]):
+                self.defaultLocation = kwargs["defaultLocation"]
+                self.dialog["defaultLocation"] = self.defaultLocation
+                if not self.defaultLocation.startswith("/"):
+                    self.defaultLocation = "/" + self.defaultLocation
+                self.dialogString += (' default location (POSIX file \"' + self.defaultLocation + '\" as alias)')
             
         
         if "invisibles" in kwargs.keys():
@@ -70,17 +82,35 @@ class ASChooseFolderDialog:
     
     def displayChooseFolderDialog(self, theApplication, theDialog):
         self.output = subprocess.check_output(['osascript',
+            '-e', 'set theFolders to {}',
+            '-e', 'set thePFolders to {}',
             '-e', theApplication,
             '-e', 'activate',
             '-e', 'try',
             '-e', theDialog,
-            '-e', 'set theFolder to (POSIX path of theFolder as text)',
+            #'-e', 'set theFolder to (POSIX path of theFolder as text)',
+            '-e', 'set theFolders to theFolders & theFolder',
+            '-e', 'repeat with aFolder in theFolders',
+            '-e', 'if the length of thePFolders is greater than 1 then',
+            '-e', 'set thePFolders to thePFolders & \", \" & (POSIX path of aFolder) as text',
+            '-e', 'else',
+            '-e', 'set thePFolders to thePFolders & (POSIX path of aFolder) as text',
+            '-e', 'end if',
+            '-e', 'end repeat',
             '-e', 'on error number -128',
             '-e', 'set theFolder to \"False\"',
             '-e', 'end try',
             '-e', 'return theFolder',
             '-e', 'end tell'])
-        return self.output.strip()
+        pathsString = self.output.strip()
+        if pathsString != "False":
+            if len(pathsString.split(", ")) > 1:
+                paths = pathsString.split(", ")
+            else:
+                paths = pathsString
+        else:
+            paths = "False"
+        return paths
         
         
     def result(self):
@@ -98,5 +128,9 @@ class ASChooseFolderDialog:
             
     
     def __repr__(self):
-        return self.dialog["result"]
+        return self.result()
+    
+        
+    def __str__(self):
+        return str(self.result())
             
