@@ -1,9 +1,9 @@
 #PyASAlert, PyASDialog
 ***Simple Python wrappers for AppleScript Alerts and Dialogs.***
 
-Both implement all the options and parameters of their AppleScript counterparts, if these are multi-worded in AS they're camelcased in PyASAlert and PyASDialog. Have a look below for the details.
+These wrappers implement all the options and parameters of their AppleScript counterparts, if these are multi-worded in AS they're camelcased in PyASAlert and PyASDialog. Have a look below for the details.
 
-Or you might just have a look at and run `_demo_ASDialog.py` and take it from there.
+Or you might just have a look at and run `_demo_*.*.py` and take it from there.
 
 
 ##PyASAlert
@@ -278,7 +278,7 @@ Toggle whether folders inside application packages can be accessed. Defaults to 
 
 ##### Example
 
-	myChooseFolderDialog = ASChooseFolderDialog(defaultLocation="/Users/franz/Documents/")
+	myChooseFolderDialog = ASChooseFolderDialog(defaultLocation="~/Documents/")
 
 ### Accessing the Dialog Result, Methods
 
