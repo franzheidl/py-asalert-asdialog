@@ -60,7 +60,7 @@ class ASChooseApplicationDialog:
             '-e', 'activate',
             '-e', 'try',
             '-e', theDialog,
-            '-e', 'on error number 128',
+            '-e', 'on error number -128',
             '-e', 'set theApp to \"False\"',
             '-e', 'end try',
             '-e', 'return theApp',

@@ -5,8 +5,6 @@
 # MIT license.
 
 
-# TODO: returns HFS paths ?!? should be POSIX
-
 import os
 import subprocess
 
@@ -98,9 +96,9 @@ class ASChooseFolderDialog:
             '-e', 'end if',
             '-e', 'end repeat',
             '-e', 'on error number -128',
-            '-e', 'set theFolder to \"False\"',
+            '-e', 'set thePFolders to \"False\"',
             '-e', 'end try',
-            '-e', 'return theFolder',
+            '-e', 'return thePFolders',
             '-e', 'end tell'])
         pathsString = self.output.strip()
         if pathsString != "False":
