@@ -21,6 +21,12 @@ class ASChooseApplicationDialog:
         self.dialog["application"] = self.application
         self.applicationString = 'tell application \"' + self.application + '\"'
         
+        if "returnAs" in kwargs.keys() and kwargs["returnAs"] == "paths":
+            self.returnAs = "paths"
+            self.dialog["returnAs"] = self.returnAs
+            self.dialogString += ' as alias'
+        else:
+            self.returnAs = "names"
         
         if 'title' in kwargs.keys():
             self.title = kwargs["title"]
@@ -43,10 +49,10 @@ class ASChooseApplicationDialog:
             else:
                 self.multipleSelectionsAllowed = kwargs["multipleSelectionsAllowed"]
                 self.dialog["multipleSelectionsAllowed"] = False
-                
         
-        if 'as' in kwargs.keys():
-            pass
+        
+        
+        
             
         self._result = self.displayChooseApplicationDialog(self.applicationString, self.dialogString)
         self.dialog["result"] = self._result
@@ -54,17 +60,37 @@ class ASChooseApplicationDialog:
         
         
     def displayChooseApplicationDialog(self, theApplication, theDialog):
-        self.output = subprocess.check_output(['osascript',
-            #'-e', 'set theApps to {}',
-            '-e', theApplication,
-            '-e', 'activate',
-            '-e', 'try',
-            '-e', theDialog,
-            '-e', 'on error number -128',
-            '-e', 'set theApp to \"False\"',
-            '-e', 'end try',
-            '-e', 'return theApp',
-            '-e', 'end tell'])
+        if self.returnAs == "paths":
+            self.output = subprocess.check_output(['osascript',
+                '-e', 'set theAppPaths to {}',
+                '-e', theApplication,
+                '-e', 'activate',
+                '-e', 'try',
+                '-e', theDialog,
+                '-e', 'if class of theApp is text',
+                '-e', 'set theAppPaths to POSIX path of (theApp as alias)',
+                '-e', 'else if class of theApp is list',
+                '-e', 'repeat with anApp in theApp',
+                '-e', 'set theAppPaths to theAppPaths & POSIX path of (anApp as alias)',
+                '-e', 'end repeat',
+                '-e', 'end if',
+                '-e', 'on error number -128',
+                '-e', 'set theAppPaths to \"False\"',
+                '-e', 'end try',
+                '-e', 'return theAppPaths',
+                '-e', 'end tell'])
+        else:
+            self.output = subprocess.check_output(['osascript',
+                '-e', theApplication,
+                '-e', 'activate',
+                '-e', 'try',
+                '-e', theDialog,
+                '-e', 'on error number -128',
+                '-e', 'set theApp to \"False\"',
+                '-e', 'end try',
+                '-e', 'return theApp',
+                '-e', 'end tell'])
+            
         appsString = self.output.strip()
         if appsString != "False":
             if len(appsString.split(", ")) > 1:
@@ -73,6 +99,9 @@ class ASChooseApplicationDialog:
                 apps = appsString
         else:
             apps = "False"
+            
+
+            
         return apps
         
     
@@ -88,6 +117,9 @@ class ASChooseApplicationDialog:
             return True
         else:
             return False
+            
+
+        
             
     
     def __repr__(self):
