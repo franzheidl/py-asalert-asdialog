@@ -31,11 +31,14 @@ class ASChooseFolderDialog:
         
         
         if "defaultLocation" in kwargs.keys():
-            if os.path.exists(kwargs["defaultLocation"]):
-                self.defaultLocation = kwargs["defaultLocation"]
+            defLoc = kwargs["defaultLocation"]
+            if defLoc.startswith("~") or defLoc.startswith("/~"):
+                defLoc = os.path.expanduser(defLoc)
+            if not defLoc.startswith("/"):
+                defLoc = "/" + defLoc
+            if os.path.exists(defLoc):
+                self.defaultLocation = defLoc
                 self.dialog["defaultLocation"] = self.defaultLocation
-                if not self.defaultLocation.startswith("/"):
-                    self.defaultLocation = "/" + self.defaultLocation
                 self.dialogString += (' default location (POSIX file \"' + self.defaultLocation + '\" as alias)')
             
         
