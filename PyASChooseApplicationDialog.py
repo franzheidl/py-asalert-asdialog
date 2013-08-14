@@ -118,11 +118,8 @@ class ASChooseApplicationDialog:
         else:
             return False
             
-
-        
-            
-    
+                
     def __repr__(self):
-        return self.dialog.result()
+        return self.result()
         
             
