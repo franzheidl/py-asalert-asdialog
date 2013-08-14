@@ -125,7 +125,4 @@ class ASChooseApplicationDialog:
     def __repr__(self):
         return self.dialog.result()
         
-    
-    def __str__(self):
-        return str(self.result())
             
