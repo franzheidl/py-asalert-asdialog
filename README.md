@@ -8,7 +8,7 @@ Or you might just have a look at and run `_demo_*.*.py` and take it from there.
 
 ##PyASAlert
 
-![PyASAlert Screenshot](http://github.com/franzheidl/py-asalert-asdialog/raw/master/screenshots/PyASAlert.png)
+![PyASAlert Screenshot](screenshots/PyASAlert.png)
 
 ### Usage
 
@@ -77,7 +77,7 @@ which returns True if the alert was canceled, otherwise False.
 
 ## PyASDialog
 
-![PyASDialog Screenshot](http://github.com/franzheidl/py-asalert-asdialog/raw/master/screenshots/PyASDialog.png)
+![PyASDialog Screenshot](screenshots/PyASDialog.png)
 
 ### Usage
 
